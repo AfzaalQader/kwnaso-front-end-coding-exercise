@@ -1,43 +1,6 @@
-/* import React from 'react';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-import BulkDelete from './BulkDelete';
-import CreateTask from './CreateTask';
-import ListTask from './ListTask';
-
-function App() {
-  return (
-    <Router>
-      <ul>
-        <li>
-          <Link to='/'>List</Link>
-        </li>
-        <li>
-          <Link to='/about'>Create</Link>
-        </li>
-        <li>
-          <Link to='/contect'>Bulk Delete</Link>
-        </li>
-      </ul>
-      <Switch>
-        <Route exact path='/'>
-          <ListTask />
-        </Route>
-        <Route path='/about'>
-          <CreateTask />
-        </Route>
-        <Route path='/contect'>
-          <BulkDelete />
-        </Route>
-      </Switch>
-    </Router>
-  );
-}
-
-export default App; */
-
 import React, { Component } from 'react';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import Menu from './Menu';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import { HashRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 
 // Pages
 const ListTask = React.lazy(() => import('./ListTask'));
@@ -49,15 +12,30 @@ class App extends Component {
     return (
       <HashRouter>
         <React.Suspense fallback={'loading'}>
+          <Container>
+            <Navbar bg="light" expand="lg">
+              <Container>
+                
+                <Navbar.Collapse>
+                  <Nav className="me-auto">
+                    <Nav.Link ><Route><Link to="/">List Task</Link></Route></Nav.Link>
+                    <Nav.Link ><Route><Link to="/create-task">Create List</Link></Route></Nav.Link>
+                    <Nav.Link ><Route><Link to="/bulk-delete">Bulk Delete</Link></Route></Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+
+          </Container>
           <Switch>
             <Route
               exact
               path='/'
               name='List Task'
-              // render={(props) => <ListTask {...props} />}
+            // render={(props) => <ListTask {...props} />}
             >
               <Redirect to="/list-task" />
-              </Route>
+            </Route>
             <Route
               exact
               path='/list-task'
@@ -76,8 +54,6 @@ class App extends Component {
               name='Bulk Delete'
               render={(props) => <BulkDelete {...props} />}
             />
-            {/* <SecureRoutes path='/' name='Home' component={TheLayout} /> */}
-            {/* <Route path="/" name="Home" render={props => <TheLayout {...props}/>} /> */}
           </Switch>
         </React.Suspense>
       </HashRouter>

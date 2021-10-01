@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {setTaskAction} from './redux/action';
+import { setTaskAction } from './redux/action';
 
 const CreateTask = (props) => {
     const [task, setTask] = useState(null);
@@ -13,7 +14,7 @@ const CreateTask = (props) => {
         setTask(task_name)
     }
 
-    const onClickSubmit = async(e) => {
+    const onClickSubmit = async (e) => {
         const taskArray = [...state.getAllTaskReducer.tasks];
         let obj = {
             id: taskArray.length + 1,
@@ -22,41 +23,20 @@ const CreateTask = (props) => {
         taskArray.push(obj);
         await dispatch(setTaskAction(taskArray));
         props.history.push('/')
-       /*  let obj = {};
-        let taskItem = [];
-        taskItem = JSON.parse(localStorage.getItem("task"));
-        if(taskItem && taskItem.length > 0) {
-            const id = taskItem.length + 1;
-            obj = {
-                id: id,
-                name: task
-            }
-            taskItem.push(obj);
-
-            localStorage.setItem("task", JSON.stringify(taskItem));
-        } else {
-            obj = {
-                id: 1,
-                name: task
-            }
-            const item = [];
-            item.push(obj)
-            localStorage.setItem("task", JSON.stringify(item));
-        }
-        setTaskSubmit(true);
-        props.history.push('/') */
-    } 
+    }
 
     return (
         <>
-            <h1>Create Task</h1>
-            <div className="container">
+            <Container>
+                <h1>Create Task</h1>
                 <div>
-                    <input type="text" name="taskName" placeholder="Enter Task Name" onChange={onInputChange} />
-                    <br />
-                    <button onClick={onClickSubmit}>Submit</button>
+                    <div>
+                        <input type="text" name="taskName" placeholder="Enter Task Name" onChange={onInputChange} style={{width: '20%', borderRadius: '5px'}} />
+                        <br />
+                        <button onClick={onClickSubmit} style={{marginTop: '10px', }}>Submit</button>
+                    </div>
                 </div>
-            </div>
+            </Container>
         </>
     )
 }

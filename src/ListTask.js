@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
-import Menu from './Menu';
+import { Container } from 'react-bootstrap';
 
 // const taskList = JSON.parse(localStorage.getItem('task'));
 
@@ -16,16 +16,18 @@ const ListTask = () => {
 
   return (
     <>
-      <h1>List Task</h1>
-      {taskList.length <= 0 ? (
-        <h5>Data not Found</h5>
-      ) : (
-        <ul>
-          {taskList.map((item, index) => (
-            <li key={index}>{item.name}</li>
-          ))}
-        </ul>
-      )}
+      <Container>
+        <h1>List Task</h1>
+        {taskList.length <= 0 ? (
+          <h5>Data not Found</h5>
+        ) : (
+          <ol>
+            {taskList.map((item, index) => (
+              <li key={index} className="bg-light" style={{marginTop: '10px', padding: '10px', fontSize: '20px'}}>{item.name}</li>
+            ))}
+          </ol>
+        )}
+      </Container>
     </>
   );
 };

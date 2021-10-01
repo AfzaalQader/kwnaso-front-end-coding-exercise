@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { store, persistor } from './redux/index';
+import 'bootstrap/dist/css/bootstrap.css';
 
  {/* <React.StrictMode>
     <App />
